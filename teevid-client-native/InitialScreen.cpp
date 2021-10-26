@@ -1317,28 +1317,39 @@ std::string InitialScreen::GetAudioFormatName(const AudioSettings &audioSettings
 
 void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride)
 {
-    // comment this to remove a blu line on top of the video
-    int index = 0;
-    for (int j = 0; j < size / 3; j += 4)
+    if (isCameraOn())
     {
-      if (j < size / 3)
-      {
-        data[j] = 0x00;
-        data[j + 1] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-        data[j + 2] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-      }
-      else if (j < size * 2 / 3)
-      {
-        data[j] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-        data[j + 1] = 0x00;
-        data[j + 2] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-      }
-      else
-      {
-        data[j] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-        data[j + 1] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-        data[j + 2] = 0x00;
-      }
+        // comment it to remove a cyan line on top of the video
+        int index = 0;
+        for (size_t j = 0; j < size / 3; j += 4)
+        {
+            if (j < size / 3)
+            {
+                data[j] = 0x00;
+                data[j + 1] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
+                data[j + 2] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
+            }
+            else if (j < size * 2 / 3)
+            {
+                data[j] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
+                data[j + 1] = 0x00;
+                data[j + 2] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
+            }
+            else
+            {
+                data[j] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
+                data[j + 1] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
+                data[j + 2] = 0x00;
+            }
+        }
+    }
+    else
+    {
+        // if video is muted - just send dummy black video in order to reduce bandwidth
+        for (size_t i = 0; i < size; ++i)
+        {
+            data[i] = 0;
+        }
     }
 }
 

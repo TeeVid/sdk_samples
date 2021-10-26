@@ -124,7 +124,7 @@ void CallItemVideoView::OnVideoFrame(unsigned char *data, size_t size, size_t st
         return;
     }
 
-    std::lock_guard<std::mutex> lock(mt_video);
+    //std::lock_guard<std::mutex> lock(mt_video);
 
     int width = GetWidthFromStride(_videoFormatType, stride);
     int height = size / stride;
