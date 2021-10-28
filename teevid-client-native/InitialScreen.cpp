@@ -1353,6 +1353,9 @@ void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t
     }
 }
 
-void InitialScreen::OnAudioSourceFrame (unsigned char *data, size_t size, int channels, int bps) {
-// not implemented yet
+void InitialScreen::OnAudioSourceFrame (unsigned char *data, size_t size, int channels, int bps)
+{
+
+    // TODO: uncomment this line to see frame details
+    //qDebug() << "OnAudioSourceFrame size:" << size << "channels:" << channels << "bps:" << bps;
 }
