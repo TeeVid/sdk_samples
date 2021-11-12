@@ -22,7 +22,7 @@ sudo apt-get install --yes libgstreamer1.0-dev \
  libgstreamer-plugins-base1.0-dev \
  libgstreamer-plugins-good1.0-dev \
  libgstreamer-plugins-bad1.0-dev
-sudo apt install --yes libnice-dev gstreamer1.0-nice libssl-dev
+sudo apt install --yes libnice-dev gstreamer1.0-nice libssl-dev libpng-dev
 
 install_libnice() {
   echo "Install libnice"
