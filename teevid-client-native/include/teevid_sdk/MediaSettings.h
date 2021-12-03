@@ -139,6 +139,7 @@ typedef struct {
   SourceMode sourceMode;
   unsigned int previewWindowId = 0;
   SinkElement sinkElement = eGStreamer;
+  bool useAI = false;
 } MediaSettings;
 
 }
