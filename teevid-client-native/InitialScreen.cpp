@@ -67,6 +67,7 @@ InitialScreen::InitialScreen(QWidget *parent) : QWidget(parent), ui(new Ui::Init
 
     // _sourceMode is used inside InitUI, so initialize it's value before the InitUI call
     _webcamPublishSettings.sourceMode = kInternalSourceMode;
+    _webcamPublishSettings.useAI = false;
 
     _screenPublishSettings = _webcamPublishSettings;
     _screenPublishSettings.sourceMode = kInternalSourceMode;
