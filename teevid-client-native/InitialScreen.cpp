@@ -216,12 +216,14 @@ void InitialScreen::InitUI()
     ui->frameCallPart_2->setParticipantName("Participant #2");
     ui->frameCallPart_3->setParticipantName("Participant #3");
     ui->frameCallPart_4->setParticipantName("Participant #4");
+    ui->frameCallPart_5->setParticipantName("Participant #5");
 
     // add all video items except local
     callItems_.push_back(ui->frameCallPart_1);
     callItems_.push_back(ui->frameCallPart_2);
     callItems_.push_back(ui->frameCallPart_3);
     callItems_.push_back(ui->frameCallPart_4);
+    callItems_.push_back(ui->frameCallPart_5);
 
     for (auto iterCallItem = callItems_.begin(); iterCallItem != callItems_.end(); ++iterCallItem)
     {
@@ -268,6 +270,7 @@ void InitialScreen::InitUI()
     ui->frameCallPart_2->setDirectVideoRendering(false);
     ui->frameCallPart_3->setDirectVideoRendering(false);
     ui->frameCallPart_4->setDirectVideoRendering(false);
+    ui->frameCallPart_5->setDirectVideoRendering(false);
 
     if(_webcamPublishSettings.sourceMode == kExternalSourceMode)
     {
