@@ -140,6 +140,10 @@ typedef struct {
   unsigned int previewWindowId = 0;
   SinkElement sinkElement = eGStreamer;
   bool useAI = false;
+
+  // available only for Jetson (aarch64)
+  // has no effect for desktop
+  bool useCUDA = false;
 } MediaSettings;
 
 }
