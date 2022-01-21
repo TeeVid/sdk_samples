@@ -79,6 +79,12 @@ if [ "$ARCHITECTURE" = "aarch64" ]; then
 
     echo "Install $CUSTOM_LIB_DIR/gstreamer-1.0/libgstnvv4l2camerasrc.so"
     sudo cp $CUSTOM_LIB_DIR/gstreamer-1.0/libgstnvv4l2camerasrc.so $INSTALL_LIB_DIR/gstreamer-1.0/
+
+    echo "Install $CUSTOM_LIB_DIR/cuda/libnv_frame_marking_cuda.so"
+    sudo cp $CUSTOM_LIB_DIR/cuda/libnv_frame_marking_cuda.so $INSTALL_LIB_DIR
+
+    echo "Install $CUSTOM_LIB_DIR/cuda/libnv_frame_demarking_cuda.so"
+    sudo cp $CUSTOM_LIB_DIR/cuda/libnv_frame_demarking_cuda.so $INSTALL_LIB_DIR
 fi
 
 echo "Install video modifying libraries"
