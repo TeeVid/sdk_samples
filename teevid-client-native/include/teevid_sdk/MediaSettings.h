@@ -144,6 +144,7 @@ typedef struct {
   // available only for Jetson (aarch64)
   // has no effect for desktop
   bool useCUDA = false;
+  int restrictFps = 0;
 } MediaSettings;
 
 }

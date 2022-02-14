@@ -69,6 +69,7 @@ InitialScreen::InitialScreen(QWidget *parent) : QWidget(parent), ui(new Ui::Init
     _webcamPublishSettings.sourceMode = kInternalSourceMode;
     _webcamPublishSettings.useAI = false;
     _webcamPublishSettings.useCUDA = false;
+    _webcamPublishSettings.restrictFps = 11;
 
     _screenPublishSettings = _webcamPublishSettings;
     _screenPublishSettings.sourceMode = kInternalSourceMode;
