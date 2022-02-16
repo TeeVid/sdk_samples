@@ -69,7 +69,6 @@ InitialScreen::InitialScreen(QWidget *parent) : QWidget(parent), ui(new Ui::Init
     _webcamPublishSettings.sourceMode = kInternalSourceMode;
     _webcamPublishSettings.useAI = false;
     _webcamPublishSettings.useCUDA = false;
-    //_webcamPublishSettings.restrictFps = 11;
 
     _screenPublishSettings = _webcamPublishSettings;
     _screenPublishSettings.sourceMode = kInternalSourceMode;
@@ -1321,8 +1320,10 @@ std::string InitialScreen::GetAudioFormatName(const AudioSettings &audioSettings
 }
 
 
-void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride)
+void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride, unsigned char *alpha_data, size_t alpha_size)
 {
+    // TODO: fill alpha_data array with alpha channel values!!!
+
     if (isCameraOn())
     {
         // comment it to remove a cyan line on top of the video
