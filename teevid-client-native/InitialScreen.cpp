@@ -1349,14 +1349,13 @@ void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t
 //        cv::Mat inMat = Mat(1080, 1920, CV_8UC4, data, 0);  // unsigned char*  => Mat2160, 3840
 //        cv::cvtColor(inMat , inMat , cv::COLOR_RGBA2RGB);
 
-//        cv::Mat inMat_out = Mat(1080, 1920, CV_32FC1, alpha_data);
+//        cv::Mat inMat_out = Mat(1080, 1920, CV_8UC1, alpha_data);
 
 //        std::vector<cv::Rect> list_roi;
 //        cv::Rect rect(0, 0, 1920, 1080);
 //        list_roi.push_back(rect);
 
 //        hibrain.body_segment(inMat,list_roi,inMat_out);
-
 //        inMat_out= inMat_out*255.0;
 //    }
 }
