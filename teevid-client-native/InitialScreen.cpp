@@ -67,7 +67,7 @@ InitialScreen::InitialScreen(QWidget *parent) : QWidget(parent), ui(new Ui::Init
 
     // _sourceMode is used inside InitUI, so initialize it's value before the InitUI call
     _webcamPublishSettings.sourceMode = kInternalSourceMode;
-    _webcamPublishSettings.useAI = false;
+    _webcamPublishSettings.useAI = true;
     _webcamPublishSettings.useCUDA = false;
 
     _screenPublishSettings = _webcamPublishSettings;
@@ -1322,41 +1322,40 @@ std::string InitialScreen::GetAudioFormatName(const AudioSettings &audioSettings
 
 void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride, unsigned char *alpha_data, size_t alpha_size)
 {
-    // TODO: fill alpha_data array with alpha channel values!!!
+//    if (isCameraOn())
+//    {
+//        // comment it to remove a cyan line on top of the video
+//        int index = 0;
+//        for (size_t j = 0; j < size / 3; j += 4)
+//        {
+//            data[j] = 0x00;
+//            data[j + 1] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
+//            data[j + 2] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
+//        }
+//    }
+//    else
+//    {
+//        // if video is muted - just send dummy black video in order to reduce bandwidth
+//        for (size_t i = 0; i < size; ++i)
+//        {
+//            data[i] = 0;
+//        }
+//    }
 
-    if (isCameraOn())
+    if (alpha_data != NULL && alpha_size > 0)
     {
-        // comment it to remove a cyan line on top of the video
-        int index = 0;
-        for (size_t j = 0; j < size / 3; j += 4)
-        {
-            if (j < size / 3)
-            {
-                data[j] = 0x00;
-                data[j + 1] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-                data[j + 2] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-            }
-            else if (j < size * 2 / 3)
-            {
-                data[j] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-                data[j + 1] = 0x00;
-                data[j + 2] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-            }
-            else
-            {
-                data[j] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-                data[j + 1] = (index < 16) ? 0xff - (index * 4) : 0xff - (32 - index) * 4;
-                data[j + 2] = 0x00;
-            }
-        }
-    }
-    else
-    {
-        // if video is muted - just send dummy black video in order to reduce bandwidth
-        for (size_t i = 0; i < size; ++i)
-        {
-            data[i] = 0;
-        }
+        cv::Mat inMat = Mat(1080, 1920, CV_8UC4, data, 0);  // unsigned char*  => Mat2160, 3840
+        cv::cvtColor(inMat , inMat , cv::COLOR_RGBA2RGB);
+
+        cv::Mat inMat_out = Mat(1080, 1920, CV_32FC1, alpha_data);
+
+        std::vector<cv::Rect> list_roi;
+        cv::Rect rect(0, 0, 1920, 1080);
+        list_roi.push_back(rect);
+
+        hibrain.body_segment(inMat,list_roi,inMat_out);
+
+        inMat_out= inMat_out*255.0;
     }
 }
 
