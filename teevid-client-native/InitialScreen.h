@@ -62,7 +62,7 @@ public:
     void OnRecognizedTextReceived(const std::string& participant, const std::string& original_text, const std::string& translated_text) override;
 
     // IFrameModifier
-    void OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride, int *alpha_data, size_t alpha_size) override;
+    void OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride, float *alpha_data, size_t alpha_size) override;
     void OnAudioSourceFrame (unsigned char *data, size_t size, int channels, int bps) override;
 signals:
     void roomConnectReceived(int videoWidth, int videoHeight);

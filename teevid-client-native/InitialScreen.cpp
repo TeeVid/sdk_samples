@@ -1320,7 +1320,7 @@ std::string InitialScreen::GetAudioFormatName(const AudioSettings &audioSettings
 }
 
 
-void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride, int *alpha_data, size_t alpha_size)
+void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride, float *alpha_data, size_t alpha_size)
 {
     if (isCameraOn())
     {
