@@ -1320,7 +1320,7 @@ std::string InitialScreen::GetAudioFormatName(const AudioSettings &audioSettings
 }
 
 
-void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride, unsigned char *alpha_data, size_t alpha_size)
+void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t stride, int *alpha_data, size_t alpha_size)
 {
     if (isCameraOn())
     {
@@ -1346,17 +1346,39 @@ void InitialScreen::OnVideoSourceFrame (unsigned char *data, size_t size, size_t
 
 //    if (alpha_data != NULL && alpha_size > 0)
 //    {
-//        cv::Mat inMat = Mat(1080, 1920, CV_8UC4, data, 0);  // unsigned char*  => Mat2160, 3840
-//        cv::cvtColor(inMat , inMat , cv::COLOR_RGBA2RGB);
+//        cv::Mat inMat = cv::Mat(1080, 1920, CV_8UC4, data);  // unsigned char*  => Mat2160, 3840
+//        cv::cvtColor(inMat, inMat, cv::COLOR_RGBA2RGB);
 
-//        cv::Mat inMat_out = Mat(1080, 1920, CV_8UC1, alpha_data);
-
+//        cv::Mat inMat_out = cv::Mat(1080, 1920, CV_8UC1, alpha_data);
+//        //inMat_out.convertTo(inMat_out, CV_32FC1);
 //        std::vector<cv::Rect> list_roi;
 //        cv::Rect rect(0, 0, 1920, 1080);
 //        list_roi.push_back(rect);
-
 //        hibrain.body_segment(inMat,list_roi,inMat_out);
 //        inMat_out= inMat_out*255.0;
+//        inMat_out.convertTo(inMat_out, CV_8UC1);
+
+//        //data
+//        int datanum = 3;
+//        for (int j = 0; j < 1080; j++)
+//        {
+//            for (int i = 0; i < 1920; i++)
+//            {
+//                *(data+datanum) = inMat_out.ptr<int>(j, i)[0];
+//                datanum += 4;
+//            }
+//        }
+
+//        //alpha_data
+//        int alpha_datanum = 0;
+//        for (int j = 0; j < 1080; j++)
+//        {
+//            for (int i = 0; i < 1920; i++)
+//            {
+//                *(alpha_data+alpha_datanum) = inMat_out.ptr<int>(j, i)[0];
+//                alpha_datanum = alpha_datanum++;
+//            }
+//        }
 //    }
 }
 
