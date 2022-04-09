@@ -443,6 +443,19 @@ void InitialScreen::OnStreamAdded (long streamId, const std::string& name, const
 
             teeVidClient_->Subscribe(streamId, ui->frameCallPart_Local->_subscribeSettings, ui->frameCallPart_Local);
         }
+//        else if (type == eScreen)
+//        {
+//            CallItemVideoView* callItem = GetVacantVideoView();
+//            if (callItem)
+//            {
+//                callItem->setStreamId(streamId);
+//                callItem->setParticipantOrder(order);
+//                callItem->setVideoFormat(kRGBA);
+//                callItem->setAudioSampleRate(cAudioSubscribeSampleRate);
+
+//                teeVidClient_->Subscribe(streamId, callItem->_subscribeSettings, callItem);
+//            }
+//        }
     }
     else
     {
