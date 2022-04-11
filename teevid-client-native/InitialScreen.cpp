@@ -71,6 +71,7 @@ InitialScreen::InitialScreen(QWidget *parent) : QWidget(parent), ui(new Ui::Init
     _webcamPublishSettings.useCUDA = false;
 
     _screenPublishSettings = _webcamPublishSettings;
+    _screenPublishSettings.videoSettings.videoFormatType = kRGBA;
     _screenPublishSettings.sourceMode = kInternalSourceMode;
 
     _speechSettings.sdk_speech_key = cSpeechKey;
@@ -443,19 +444,19 @@ void InitialScreen::OnStreamAdded (long streamId, const std::string& name, const
 
             teeVidClient_->Subscribe(streamId, ui->frameCallPart_Local->_subscribeSettings, ui->frameCallPart_Local);
         }
-//        else if (type == eScreen)
-//        {
-//            CallItemVideoView* callItem = GetVacantVideoView();
-//            if (callItem)
-//            {
-//                callItem->setStreamId(streamId);
-//                callItem->setParticipantOrder(order);
-//                callItem->setVideoFormat(kRGBA);
-//                callItem->setAudioSampleRate(cAudioSubscribeSampleRate);
+        else if (type == eScreen)
+        {
+            CallItemVideoView* callItem = GetVacantVideoView();
+            if (callItem)
+            {
+                callItem->setStreamId(streamId);
+                callItem->setParticipantOrder(order);
+                callItem->setVideoFormat(kRGBA);
+                callItem->setAudioSampleRate(cAudioSubscribeSampleRate);
 
-//                teeVidClient_->Subscribe(streamId, callItem->_subscribeSettings, callItem);
-//            }
-//        }
+                teeVidClient_->Subscribe(streamId, callItem->_subscribeSettings, callItem);
+            }
+        }
     }
     else
     {
