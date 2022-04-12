@@ -52,7 +52,7 @@ InitialScreen::InitialScreen(QWidget *parent) : QWidget(parent), ui(new Ui::Init
 //    _webcamPublishSettings.videoSettings.useWatermark = true;
 //    _webcamPublishSettings.videoSettings.watermarkOptions.imageFileName = "/home/username/watermark.png";
 
-    // TODO: please ignore these 2 values now
+//    // TODO: please ignore these 2 values now
 //    _webcamPublishSettings.videoSettings.watermarkOptions.width = 270;
 //    _webcamPublishSettings.videoSettings.watermarkOptions.height = 240;
 
