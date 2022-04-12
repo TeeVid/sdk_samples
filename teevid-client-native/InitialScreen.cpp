@@ -51,8 +51,11 @@ InitialScreen::InitialScreen(QWidget *parent) : QWidget(parent), ui(new Ui::Init
 
 //    _webcamPublishSettings.videoSettings.useWatermark = true;
 //    _webcamPublishSettings.videoSettings.watermarkOptions.imageFileName = "/home/username/watermark.png";
+
+//    // TODO: please ignore these 2 values now
 //    _webcamPublishSettings.videoSettings.watermarkOptions.width = 270;
 //    _webcamPublishSettings.videoSettings.watermarkOptions.height = 240;
+
 //    _webcamPublishSettings.videoSettings.watermarkOptions.offset_x = 20;
 //    _webcamPublishSettings.videoSettings.watermarkOptions.offset_y = 20;
 //    _webcamPublishSettings.videoSettings.watermarkOptions.position = eWatermarkPosition::BottomLeft;
@@ -71,6 +74,7 @@ InitialScreen::InitialScreen(QWidget *parent) : QWidget(parent), ui(new Ui::Init
     _webcamPublishSettings.useCUDA = false;
 
     _screenPublishSettings = _webcamPublishSettings;
+    _screenPublishSettings.videoSettings.videoFormatType = kRGBA; // please use RGBA here
     _screenPublishSettings.sourceMode = kInternalSourceMode;
 
     _speechSettings.sdk_speech_key = cSpeechKey;
@@ -442,6 +446,19 @@ void InitialScreen::OnStreamAdded (long streamId, const std::string& name, const
             ui->frameCallPart_Local->setAudioSampleRate(cAudioSubscribeSampleRate);
 
             teeVidClient_->Subscribe(streamId, ui->frameCallPart_Local->_subscribeSettings, ui->frameCallPart_Local);
+        }
+        else if (type == eScreen)
+        {
+            CallItemVideoView* callItem = GetVacantVideoView();
+            if (callItem)
+            {
+                callItem->setStreamId(streamId);
+                callItem->setParticipantOrder(order);
+                callItem->setVideoFormat(kRGBA);
+                callItem->setAudioSampleRate(cAudioSubscribeSampleRate);
+
+                teeVidClient_->Subscribe(streamId, callItem->_subscribeSettings, callItem);
+            }
         }
     }
     else

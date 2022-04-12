@@ -66,6 +66,10 @@ typedef enum
 struct WatermarkOptions
 {
   std::string imageFileName;
+
+  // TODO:
+  //  these 2 parameters (width and height) only have affect for non-nVidia implementation
+  //  so currently they are ignored
   int width = 0;
   int height = 0;
 
